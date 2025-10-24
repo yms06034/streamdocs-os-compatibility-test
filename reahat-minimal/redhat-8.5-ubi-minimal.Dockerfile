@@ -1,13 +1,3 @@
-# Build command (Bash):
-# docker build --no-cache \
-#   --build-arg RHEL_USERNAME=<username> \
-#   --build-arg "RHEL_PASSWORD=<password>" \
-#   -f redhat-8.5-ubi-minimal.Dockerfile \
-#   -t redhat-8.5-ubi-minimal:latest .
-#
-# Run command:
-# docker run -d -p 8088:8088 --name redhat-8.5-ubi-minimal redhat-8.5-ubi-minimal:latest sleep infinity
-
 FROM registry.redhat.io/ubi8/ubi-minimal:8.5
 
 RUN microdnf install -y dnf subscription-manager && \
