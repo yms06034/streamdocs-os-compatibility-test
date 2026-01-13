@@ -27,7 +27,7 @@ RUN microdnf install -y --releasever=8.9 \
     findutils && \
   microdnf clean all
 
-EXPOSE 8088
+EXPOSE 8080 8888
 
 RUN cat /etc/os-release && rpm -q glibc && echo "=== Total packages ===" && rpm -qa | wc -l
 CMD ["/bin/bash"]

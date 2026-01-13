@@ -38,7 +38,7 @@ RUN set -eux; \
     net-tools vim nano tar gzip && \
   dnf clean all
 
-EXPOSE 8088
+EXPOSE 8080 8888
 
 RUN cat /etc/os-release && rpm -q glibc
 CMD ["/bin/bash"]

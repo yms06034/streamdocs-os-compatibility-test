@@ -30,7 +30,7 @@ RUN microdnf remove -y subscription-manager || true && \
   microdnf clean all && \
   rm -rf /var/cache/yum/* /var/log/* /tmp/* /var/tmp/*
 
-EXPOSE 8088
+EXPOSE 8080 8888
 
 RUN cat /etc/os-release && \
   rpm -q glibc && \

@@ -1,17 +1,17 @@
-FROM registry.redhat.io/ubi9/ubi-minimal:9.6
+FROM registry.redhat.io/ubi8/ubi:8.0
 
-RUN microdnf install -y subscription-manager && \
-  microdnf clean all
+RUN dnf install -y subscription-manager && \
+  dnf clean all
 
 ARG RHEL_USERNAME
 ARG RHEL_PASSWORD
 
 RUN subscription-manager register --username=${RHEL_USERNAME} --password=${RHEL_PASSWORD} --auto-attach
 
-RUN subscription-manager repos --enable=rhel-9-for-x86_64-baseos-rpms \
-    --enable=rhel-9-for-x86_64-appstream-rpms || true
+RUN subscription-manager repos --enable=rhel-8-for-x86_64-baseos-rpms \
+    --enable=rhel-8-for-x86_64-appstream-rpms || true
 
-RUN microdnf install -y --releasever=9.6 \
+RUN dnf install -y --allowerasing --releasever=8.0 \
     procps-ng \
     wget \
     vim-minimal \
@@ -22,13 +22,13 @@ RUN microdnf install -y --releasever=9.6 \
     net-tools \
     iproute \
     xorg-x11-server-Xvfb && \
-  microdnf clean all
+  dnf clean all
 
 RUN subscription-manager unregister || true
 
-RUN microdnf remove -y subscription-manager || true && \
-  microdnf clean all && \
-  rm -rf /var/cache/yum/* /var/log/* /tmp/* /var/tmp/*
+RUN dnf remove -y subscription-manager || true && \
+  dnf clean all && \
+  rm -rf /var/cache/dnf/* /var/cache/yum/* /var/log/* /tmp/* /var/tmp/*
 
 EXPOSE 8080 8888
 
